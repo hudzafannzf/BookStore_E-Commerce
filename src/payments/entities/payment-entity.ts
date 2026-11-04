@@ -7,6 +7,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import type { Relation } from 'typeorm';
 import { Order } from '../../orders/entities/order-entity.js';
 
 @Entity({ name: 'payments' })
@@ -30,7 +31,7 @@ export class Payment {
     nullable: false,
   })
   @JoinColumn({ name: 'order_id' })
-  order: Order;
+  order: Relation<Order>;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

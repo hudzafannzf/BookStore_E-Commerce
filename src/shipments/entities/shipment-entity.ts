@@ -6,6 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import type { Relation } from 'typeorm';
 import { Order } from '../../orders/entities/order-entity.js';
 
 @Entity({ name: 'shipments' })
@@ -37,5 +38,5 @@ export class Shipment {
     nullable: false,
   })
   @JoinColumn({ name: 'order_id' })
-  order: Order;
+  order: Relation<Order>;
 }

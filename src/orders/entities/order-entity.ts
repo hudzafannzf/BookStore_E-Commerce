@@ -9,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import type { Relation } from 'typeorm';
 import { Customer } from '../../customers/entities/customer-entity.js';
 import { OrderItem } from '../../order_items/entities/order-item-entity.js';
 import { Payment } from '../../payments/entities/payment-entity.js';
@@ -37,16 +38,16 @@ export class Order {
 
   @ManyToOne(() => Customer, { nullable: false })
   @JoinColumn({ name: 'customer_id' })
-  customer: Customer;
+  customer: Relation<Customer>;
 
   @OneToMany(() => OrderItem, (item) => item.order)
-  items: OrderItem[];
+  items: Relation<OrderItem[]>;
 
   @OneToOne(() => Payment, (payment) => payment.order)
-  payment: Payment;
+  payment: Relation<Payment>;
 
   @OneToOne(() => Shipment, (shipment) => shipment.order)
-  shipment: Shipment;
+  shipment: Relation<Shipment>;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

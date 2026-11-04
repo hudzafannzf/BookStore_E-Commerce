@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import type { Relation } from 'typeorm';
 import { CustomerAddress } from '../../customer_addresses/entities/customer-addresses-entity.js';
 
 @Entity({ name: 'customers' })
@@ -28,7 +29,7 @@ export class Customer {
     () => CustomerAddress,
     (customerAddress) => customerAddress.customer,
   )
-  addresses: CustomerAddress[];
+  addresses: Relation<CustomerAddress[]>;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

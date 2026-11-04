@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import type { Relation } from 'typeorm';
 import { Customer } from '../../customers/entities/customer-entity.js';
 
 @Entity({ name: 'customer_addresses' })
@@ -36,7 +37,7 @@ export class CustomerAddress {
     { nullable: false },
   )
   @JoinColumn({ name: 'customer_id' })
-  customer: Customer;
+  customer: Relation<Customer>;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

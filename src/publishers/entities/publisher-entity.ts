@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import type { Relation } from 'typeorm';
 import { Book } from '../../books/entities/book-entity.js';
 
 @Entity({ name: 'publishers' })
@@ -18,7 +19,7 @@ export class Publisher {
   name: string;
 
   @OneToMany(() => Book, (book) => book.publisher)
-  books: Book[];
+  books: Relation<Book[]>;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

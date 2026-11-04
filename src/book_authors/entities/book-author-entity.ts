@@ -5,6 +5,7 @@ import {
   ManyToOne,
   PrimaryColumn,
 } from 'typeorm';
+import type { Relation } from 'typeorm';
 import { Book } from '../../books/entities/book-entity.js';
 import { Author } from '../../authors/entities/author-entity.js';
 
@@ -21,12 +22,12 @@ export class BookAuthor {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'book_id' })
-  book: Book;
+  book: Relation<Book>;
 
   @ManyToOne(() => Author, (author) => author.bookAuthors, {
     nullable: false,
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'author_id' })
-  author: Author;
+  author: Relation<Author>;
 }
